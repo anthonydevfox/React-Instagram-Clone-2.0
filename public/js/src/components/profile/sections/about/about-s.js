@@ -1,12 +1,13 @@
 import React from 'react'
-import Title from '../../others/title'
+import Title from '../../../others/title'
 import { FadeIn } from 'animate-components'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import TimeAgo from 'handy-timeago'
-import { profile_scroll, toggle } from '../../../utils/utils'
+import { profile_scroll, toggle } from '../../../../utils/utils'
 import ToolTip from 'react-tooltip'
-import ToTags from '../../hashtag/toTags'
+import ToTags from '../../../hashtag/toTags'
+import AboutSocial from './about-social'
 
 @connect(store => (
   { ud: store.User.user_details }
@@ -33,8 +34,7 @@ export default class About extends React.Component {
       { ud: {
         username, firstname, surname, email, joined, bio, facebook, twitter, github, instagram, website, phone
       }} = this.props,
-      { title } = this.state,
-      editLink = text => <Link to='/edit-profile' >{text}</Link>
+      { title } = this.state
 
     return (
       <div>
@@ -117,59 +117,13 @@ export default class About extends React.Component {
                   <span className='a_info'><ToTags str={`${bio}`} /></span>
                 </div>
 
-                <div className='a_facebook'>
-                  <span className='a_label'>Facebook</span>
-                  {
-                    facebook
-                      ? <a className='a_info' href={facebook} target='_blank'>{facebook}</a>
-                      : editLink('Add Facebook account')
-                  }
-                </div>
-
-                <div className='a_instagram'>
-                  <span className='a_label'>Instagram</span>
-                  {
-                    instagram
-                      ? <a className='a_info' href={instagram} target='_blank'>{instagram}</a>
-                      : editLink('Add Instagram account')
-                  }
-                </div>
-
-                <div className='a_github'>
-                  <span className='a_label'>GitHub</span>
-                  {
-                    github
-                      ? <a className='a_info' href={github} target='_blank'>{github}</a>
-                      : editLink('Add GitHub account')
-                  }
-                </div>
-
-                <div className='a_Twitter'>
-                  <span className='a_label'>Twitter</span>
-                  {
-                    twitter
-                      ? <a className='a_info' href={twitter} target='_blank'>{twitter}</a>
-                      : editLink('Add Twitter account')
-                  }
-                </div>
-
-                <div className='a_website'>
-                  <span className='a_label'>Website</span>
-                  {
-                    website
-                      ? <a className='a_info' href={website} target='_blank'>{website}</a>
-                      : editLink('Add Website')
-                  }
-                </div>
-
-                <div className='a_mobile'>
-                  <span className='a_label'>Mobile</span>
-                  {
-                    phone
-                      ? <span className='a_info'>{phone}</span>
-                      : editLink('Add phone number')
-                  }
-                </div>
+                <AboutSocial account='facebook' accountValue={facebook} />
+                <AboutSocial account='instagram' accountValue={instagram} />
+                <AboutSocial account='github' accountValue={github} />
+                <AboutSocial account='twitter' accountValue={twitter} />
+                <AboutSocial account='facebook' accountValue={facebook} />
+                <AboutSocial account='website' accountValue={website} />
+                <AboutSocial account='phone' accountValue={phone} />
 
                 <div className='a_joined'>
                   <span className='a_label'>Joined</span>
